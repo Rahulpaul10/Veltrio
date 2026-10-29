@@ -1,0 +1,22 @@
+# dependencies and build output
+node_modules/
+dist/
+
+# secrets and local environment (never commit)
+.env
+.env.*
+!.env.production
+.circle/
+recovery_file*
+
+# Arc Studio runtime logs
+traces.jsonl
+console.jsonl
+
+# logs
+*.log
+
+dist-testnet/
+
+# local release artifacts (rebuild with bun run build)
+release/

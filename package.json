@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "build": "vite build",
+    "build:testnet": "VITE_VELTRIO_NETWORK=testnet vite build --outDir dist-testnet",
     "deploy:self": "bun run ./scripts/self-deploy.ts",
     "compass:deploy": "bun run ./scripts/compass-deploy.ts",
     "fetch:abi": "bun run ./scripts/fetch-abi.ts",
@@ -12,7 +14,18 @@
     "typecheck": "tsc --noEmit",
     "check": "bash scripts/check.sh",
     "contracts:build": "forge build",
-    "contracts:test": "forge test"
+    "contracts:test": "forge test",
+    "test": "bun run scripts/test-units.ts && bun run scripts/test-flows.ts && bun run scripts/test-security.ts",
+    "test:security": "bun run scripts/test-security.ts",
+    "test:units": "bun run scripts/test-units.ts",
+    "test:flows": "bun run scripts/test-flows.ts",
+    "test:wallet": "bun run scripts/test-wallet.ts",
+    "test:wallet:mainnet": "VITE_VELTRIO_NETWORK=mainnet bun run scripts/test-wallet.ts",
+    "verify:network": "bun run scripts/verify-network.ts",
+    "verify:docs": "bun run scripts/verify-docs.ts",
+    "verify:history-provider": "bun run scripts/verify-history-provider.ts",
+    "verify:release": "bun run scripts/verify-release.ts",
+    "verify:deployed": "bun run scripts/check-deployed.ts"
   },
   "dependencies": {
     "@circle-fin/adapter-viem-v2": "^1.19.2",
@@ -29,6 +42,7 @@
     "connectkit": "^1.9.2",
     "framer-motion": "^11.15.0",
     "lucide-react": "^0.468.0",
+    "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sonner": "^1.7.1",
@@ -37,7 +51,11 @@
     "wagmi": "^2.19.5"
   },
   "overrides": {
-    "viem": "2.57.5"
+    "viem": "2.57.5",
+    "undici": "^6.29.1",
+    "@grpc/grpc-js": "^1.13.6",
+    "toml": "^5.0.1",
+    "uuid": "^11.1.1"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

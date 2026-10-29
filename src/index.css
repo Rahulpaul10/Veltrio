@@ -2,12 +2,124 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: #070e1f;
+  --bg-2: #0b1730;
+  --surface: rgba(255, 255, 255, 0.055);
+  --surface-strong: rgba(255, 255, 255, 0.09);
+  --surface-field: rgba(7, 14, 31, 0.55);
+  --ink: #f4f7fd;
+  --ink-2: #dbe5f5;
+  --muted: #a7b6d0;
+  --subtle: #7d8ead;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(140, 190, 255, 0.45);
+  --accent: #8fd3ff;
+  --accent-hover: #b6e4ff;
+  --cyan: #2dd4e6;
+  --blue: #4f8cff;
+  --success: #6fdc9b;
+  --danger: #ff7a8c;
+  --warn: #f5c76b;
+}
+
 * {
   box-sizing: border-box;
 }
 
+html {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
   min-height: 100dvh;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  background-image:
+    radial-gradient(900px 500px at 85% -10%, rgba(45, 212, 230, 0.1), transparent 60%),
+    radial-gradient(800px 500px at -10% 10%, rgba(79, 140, 255, 0.12), transparent 60%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+.display {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', Menlo, monospace;
+}
+
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.field {
+  background: var(--surface-field);
+  border: 1px solid var(--border);
+}
+
+.field:focus-within {
+  border-color: var(--border-strong);
+  box-shadow: 0 0 0 3px rgba(143, 211, 255, 0.14);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Keep the Arc Studio watermark clear of the mobile bottom navigation. */
+@media (max-width: 1023px) {
+  a[href='https://studio.arc.io/'][style*='fixed'] {
+    bottom: 76px !important;
+  }
+}
+
+/* Receipt printing: show only the receipt sheet, on white paper. */
+@media print {
+  body {
+    background: #fff !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  #receipt-sheet,
+  #receipt-sheet * {
+    visibility: visible;
+  }
+  #receipt-sheet {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    background: #fff !important;
+    color: #0b1730 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  #receipt-sheet * {
+    color: #0b1730 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
 }
